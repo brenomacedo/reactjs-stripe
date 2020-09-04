@@ -1,8 +1,12 @@
 import express from 'express'
 import cors from 'cors'
 import stripe from 'stripe'
+import dotenv from 'dotenv'
 import { v4 as uuid } from 'uuid'
-const Stripe = new stripe("pk_test_51HNSflGgw2VXXk4wvRPCtp5J6fbxfolGQiTXIKrURL6nxEW3D2zraZIuVFAiOC2DcCVj7UU6jipyuONHqKWkUJMo00LX7ARr1D", {
+
+dotenv.config()
+
+const Stripe = new stripe(String(process.env.KEY), {
     apiVersion: '2020-08-27'
 })
 const app = express()

@@ -8,7 +8,7 @@ function App() {
   const [product, setProduct] = useState({
     name: "react by fb",
     productBy: "facebook",
-    price: 10
+    price: 180
   })
 
   const makePayment = (token: Token) => {
