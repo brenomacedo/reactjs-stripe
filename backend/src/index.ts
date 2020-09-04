@@ -1,7 +1,7 @@
 import express from 'express'
 import cors from 'cors'
 import stripe from 'stripe'
-import uuid from 'uuid'
+import { v4 as uuid } from 'uuid'
 const Stripe = new stripe("pk_test_51HNSflGgw2VXXk4wvRPCtp5J6fbxfolGQiTXIKrURL6nxEW3D2zraZIuVFAiOC2DcCVj7UU6jipyuONHqKWkUJMo00LX7ARr1D", {
     apiVersion: '2020-08-27'
 })
@@ -14,7 +14,7 @@ app.post("/payment", (req, res) => {
     const { product, token } = req.body
     console.log("PRODUCT", product)
     console.log("PRICE", product.price)
-    const idempotencyKey = uuid.v4()
+    const idempotencyKey = uuid()
 
     return Stripe.customers.create({
         email: token.email,
@@ -37,7 +37,7 @@ app.post("/payment", (req, res) => {
     }).then(result => {
         res.status(200).json(result)
     }).catch(err => {
-        res.status(401).json(err)
+        res.json(err)
     })
 })
 
